@@ -1,11 +1,18 @@
 const path = require("path");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
+const webpack = require("webpack");
 
 module.exports = {
   entry: "./src/index.js",
   output: {
-    filename: "[name].js",
+    filename: "[name].bundle.js",
+    chunkFilename: "[name].bundle.js",
     path: path.resolve(__dirname, "build")
+  },
+  optimization: {
+    splitChunks: {
+      chunks: "all"
+    }
   },
   module: {
     rules: [
@@ -35,7 +42,7 @@ module.exports = {
     })
   ],
   devServer: {
-    port: "6102",
+    port: "8080",
     host: "localhost",
     hot: true,
     compress: true
